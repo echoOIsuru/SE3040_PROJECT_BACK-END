@@ -1,0 +1,26 @@
+{
+  "name": "project_management_tool",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/echoOIsuru/SE3040_PROJECT_BACK-END.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/echoOIsuru/SE3040_PROJECT_BACK-END/issues"
+  },
+  "homepage": "https://github.com/echoOIsuru/SE3040_PROJECT_BACK-END#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
