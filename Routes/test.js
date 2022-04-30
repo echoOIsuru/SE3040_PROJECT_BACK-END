@@ -1,7 +1,7 @@
 const express = require('express');
 var router = express.Router();
-const testSchema = require('./Models/TestModel')
-const mongo = require('./mongo');
+const testSchema = require('../Models/TestModel')
+const mongo = require('../mongo');
 
 
 router.get('/', async (req, res) => {
