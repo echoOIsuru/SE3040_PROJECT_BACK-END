@@ -2,8 +2,13 @@ const express = require('express');
 const app = express();
 const mongo = require('./mongo');
 const testSchema = require('./Models/TestModel')
+var router = express.Router();
 
-app.use(require('./Routes/test.js'))
+app.use("/api/v1", router);
+router.use(require('./Routes/test.js'))
+router.use(require('./Routes/testcopy.js'))
+
+
 
 // const connectToMongoDB = async () =>{
 //     await mongo().then(async (mongoose) =>{

@@ -4,7 +4,7 @@ const testSchema = require('../Models/TestModel')
 const mongo = require('../mongo');
 
 
-router.get('/', async (req, res) => {
+router.get('/gg', async (req, res) => {
         await mongo().then(async (mongoose) =>{
             try{
                 console.log('Connected to mongoDBTestPost!')
@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
 
 
     res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.write('TEST CASE 1');
+    res.write('TEST CASE 2');
     res.end();
 })
 
