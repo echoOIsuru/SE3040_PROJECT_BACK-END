@@ -3,7 +3,7 @@ const app = express();
 const mongo = require('./mongo');
 const testSchema = require('./Models/TestModel')
 
-app.use(require('./test'))
+app.use(require('./Routes/test.js'))
 
 // const connectToMongoDB = async () =>{
 //     await mongo().then(async (mongoose) =>{
