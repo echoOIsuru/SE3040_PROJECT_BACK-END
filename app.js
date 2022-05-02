@@ -1,42 +1,30 @@
 const express = require('express');
-const app = express();
-const connectDB = require('./mongo');
-const testSchema = require('./Models/TestModel')
+const connectDB = require('./database/connection');
 var router = express.Router();
+const dotenv = require('dotenv');
+const cors = require("cors");
+const bodyparser = require('body-parser');
 
+const app = express();
 
+//cross origin
+app.use(cors())
+
+//port configuration
+dotenv.config({path: 'config.env'})
+const PORT = process.env.PORT || 8080
+
+//connect mongoDB
 connectDB()
 
+//parse data to body
+app.use(bodyparser.json())
+
+//assign routers
 app.use("/api/v1", router);
-
-router.use(require('./Routes/test.js'))
-router.use(require('./routes/testcopy.js'))
+router.use(require('./Routes/router.js'))
 
 
-
-// const connectToMongoDB = async () =>{
-//     await mongo().then(async (mongoose) =>{
-//         try{
-//             console.log('Connected to mongoDB!')
-
-//             const test = {
-//                 name: "GG WP",
-//                 password: "123asd"
-//             }
-
-//             await new testSchema(test).save()
-
-//         }finally{
-//             mongoose.connection.close()
-//         }
-//     })
-// }
-
-// connectToMongoDB()
-
-
-app.listen(8090, () => {
-    console.log(`Server running on port http://localhost${8090}`);
+app.listen(PORT, () => {
+    console.log(`Server running on port http://localhost:${PORT}/api/v1`);
 })
-
-//test 2222
