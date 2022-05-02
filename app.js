@@ -1,12 +1,16 @@
 const express = require('express');
 const app = express();
-const mongo = require('./mongo');
+const connectDB = require('./mongo');
 const testSchema = require('./Models/TestModel')
 var router = express.Router();
 
+
+connectDB()
+
 app.use("/api/v1", router);
+
 router.use(require('./Routes/test.js'))
-router.use(require('./Routes/testcopy.js'))
+router.use(require('./routes/testcopy.js'))
 
 
 
@@ -32,7 +36,7 @@ router.use(require('./Routes/testcopy.js'))
 
 
 app.listen(8090, () => {
-    console.log('Server running on port 8090..');
+    console.log(`Server running on port http://localhost${8090}`);
 })
 
 //test 2222

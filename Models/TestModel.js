@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const testSchema = mongoose.Schema({
+const TestSchema = mongoose.Schema({
     name: {
         type: String,
         require: true
@@ -11,4 +11,5 @@ const testSchema = mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('test', testSchema)
+const Test = mongoose.model('tests', TestSchema)
+module.exports = Test;
