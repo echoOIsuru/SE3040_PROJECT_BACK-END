@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
 
-const TestSchema = mongoose.Schema({
+const schema = mongoose.Schema({
     name: {
         type: String,
         require: true
     },
-    password: {
+    data: {
         type: String,
         require: true
     }
 })
 
-const Test = mongoose.model('tests', TestSchema)
-module.exports = Test;
+const SupervisorModel = mongoose.model('Supervisor', schema);
+module.exports = SupervisorModel;

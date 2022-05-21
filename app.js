@@ -1,33 +1,32 @@
 const express = require('express');
+const connectDB = require('./database/connection');
+var router = express.Router();
+const dotenv = require('dotenv');
+const cors = require("cors");
+const bodyparser = require('body-parser');
+
 const app = express();
-const mongo = require('./mongo');
-const testSchema = require('./Models/TestModel')
 
-app.use(require('./Routes/test.js'))
+//cross origin
+app.use(cors())
 
-// const connectToMongoDB = async () =>{
-//     await mongo().then(async (mongoose) =>{
-//         try{
-//             console.log('Connected to mongoDB!')
+//port configuration
+dotenv.config({path: 'config.env'})
+const PORT = process.env.PORT || 8080
 
-//             const test = {
-//                 name: "GG WP",
-//                 password: "123asd"
-//             }
+//connect mongoDB
+connectDB()
 
-//             await new testSchema(test).save()
+//parse data to body
+app.use(bodyparser.json())
 
-//         }finally{
-//             mongoose.connection.close()
-//         }
-//     })
-// }
+//assign routers
+app.use("/api/v1", router);
+router.use(require('./Routes/router.js'))
 
-// connectToMongoDB()
+app.use("/api/v1/admin/", require("./Routes/adminRoutes.js"));
 
 
-app.listen(8090, () => {
-    console.log('Server running on port 8090..');
+app.listen(PORT, () => {
+    console.log(`Server running on port http://localhost:${PORT}/api/v1`);
 })
-
-//test 2222
