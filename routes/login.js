@@ -18,7 +18,7 @@ router.post("/", async (req, res) => {
 		if (user.password!==req.body.password)
 			return res.status(401).send({ message: "Invalid Email or Password" });
 
-		const token = user._id;
+		const token = user.email;
 		res.cookie("uid",token,{maxAge:900000000})
 		res.status(200).send({ data: token, message: "logged in successfully" });
 	} catch (error) {

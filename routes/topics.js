@@ -1,12 +1,12 @@
 const router = require("express").Router();
-let Topic= require("../Models/registrationModel");
+let Topic= require("../Models/TopicregistrationModel");
 
 
 
 
 router.post("/add",async (req, res) => {
 
-    const user = await Topic.findOne({ email: req.body.email });
+    const user = await Topic.findOne({ topic: req.body.topic});
     if (user)
         return res
             .status(409)
@@ -34,14 +34,28 @@ router.post("/add",async (req, res) => {
 
 })
 
-router.route("/").get((req, res) => {
+// router.route("/").get((req, res) => {
 
-    Topic.find().then((topics) => {
-        res.json(topics)
-    }).catch((err) => {
-        console.log(err)
-    })
+//     Topic.find().then((topics) => {
+//         res.json(topics)
+//     }).catch((err) => {
+//         console.log(err)
+//     })
 
-})
+// })
+
+
+
+
+router.route("/get").get(async (req, res) => {
+	console.log(req.cookies);
+		let userId = req.cookies.uid;
+		const user = await Topic.findOne({email:userId}).then((user) => {
+	
+			res.status(200).send( [user] )
+		})
+	})
+
+
 
 module.exports = router;

@@ -35,11 +35,14 @@ router.use(require('./Routes/router.js'))
 const studentRouter = require("./routes/students.js")
 const topicRouter = require("./routes/topics.js")
 const loginRouter = require("./routes/login.js")
+const groupRouter = require("./routes/groups.js")
+const fileRouter = require("./routes/file.js")
 
 app.use("/student",studentRouter);
 app.use("/topic",topicRouter);  
-app.use("/login",loginRouter); 
-
+app.use("/login",loginRouter);
+app.use("/group",groupRouter);  
+app.use("/file",fileRouter);  
 app.listen(PORT, () => {
     console.log(`Server running on port http://localhost:${PORT}/api/v1`);
 })
