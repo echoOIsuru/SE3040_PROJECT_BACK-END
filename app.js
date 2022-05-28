@@ -11,7 +11,7 @@ const app = express();
 app.use(cors())
 
 //port configuration
-dotenv.config({path: 'config.env'})
+dotenv.config({ path: 'config.env' })
 const PORT = process.env.PORT || 8080
 
 //connect mongoDB
