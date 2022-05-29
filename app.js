@@ -37,12 +37,16 @@ const topicRouter = require("./routes/topics.js")
 const loginRouter = require("./routes/login.js")
 const groupRouter = require("./routes/groups.js")
 const fileRouter = require("./routes/file.js")
+const adminRouter=require("./routes/admin.js")
+const submitionRouter = require("./routes/submition.js")
 
 app.use("/student",studentRouter);
 app.use("/topic",topicRouter);  
 app.use("/login",loginRouter);
 app.use("/group",groupRouter);  
-app.use("/file",fileRouter);  
+app.use("/file",fileRouter); 
+app.use("/submition",submitionRouter); 
+app.use("/admin",adminRouter); 
 app.listen(PORT, () => {
     console.log(`Server running on port http://localhost:${PORT}/api/v1`);
 })
