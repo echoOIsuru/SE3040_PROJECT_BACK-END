@@ -29,6 +29,10 @@ const schema = mongoose.Schema({
     topic_details: {
         type: String,
         require: true
+    },
+    s_status: {
+        type: String,
+        require: true
     }
 })
 
