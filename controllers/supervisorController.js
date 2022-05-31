@@ -1,4 +1,4 @@
-var SupervisorModel = require('../models/SupervisorModel');
+//const SupervisorModel = require('../models/SupervisorModel.js');
 
 //create new record
 exports.create = async(req, res) => {

@@ -1,5 +1,4 @@
-const StudentModel = null
-//require("../../Models/StudentModel.js");
+const StudentModel = require("../../Models/studentModel.js");
 
 
 const getStudents = async (req, res) => {
@@ -21,7 +20,7 @@ const getStudentById = async (req, res) => {
         res.status(200).json(Student);
 
         if (!Student) {
-            return res.status(404).json("No Student member found for the given id!");
+            return res.status(404).json("No Student found for the given id!");
         }
     } catch (error) {
         res.status(400).json(error);
@@ -37,26 +36,31 @@ const updateStudent = async (req, res) => {
         const Student = await StudentModel.findById(StudentId);
 
         if (!Student) {
-            return res.status(404).json("Not found such a Student member to update");
+            return res.status(404).json("Not found such a Student to update");
         }
 
-        const {
-            Student_category,
-            Student_name,
-            Student_quantity,
-            Student_description
+        const {name,
+            nic,
+            age,
+            gender,
+            email,
+            phone,
+            password
         } = req.body;
 
-        const productStudent = await StudentModel.findByIdAndUpdate(
+        const UpdatedStudent = await StudentModel.findByIdAndUpdate(
             StudentId,
             {
-                Student_category,
-                Student_name,
-                Student_quantity,
-                Student_description
+                name,
+                nic,
+                age,
+                gender,
+                email,
+                phone,
+                password
             });
 
-        res.status(200).json(productStudent);
+        res.status(200).json(UpdatedStudent);
 
     } catch (error) {
         res.status(400).json(error.message);
@@ -71,7 +75,7 @@ const deleteStudent = async (req, res) => {
         const Student = await StudentModel.findById(StudentId);
 
         if (!Student) {
-            return res.status(404).json("Not found such a Product Student to delete");
+            return res.status(404).json("Not found such a Student to delete");
         }
 
         const delStudent = await StudentModel.findByIdAndDelete(StudentId);
