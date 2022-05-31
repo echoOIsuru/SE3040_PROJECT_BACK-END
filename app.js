@@ -5,10 +5,7 @@ const dotenv = require('dotenv');
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const bodyparser = require('body-parser');
-const connection = require("./database/connection");
 const app = express();
-
-//cross origin
 
 
 //port configuration
@@ -20,12 +17,14 @@ connectDB();
 
 //parse data to body
 app.use(bodyparser.json())
-connection();
-const a = ["http://localhost:8090", "http://localhost:1234"]
-// // middlewares
 
+const a = ["http://localhost:8090", "http://localhost:1234"]
+
+//middlewares
 app.use(express.json());
+
 app.use(cookieParser());
+//cross origin
 app.use(cors({ origin: a, credentials: true }));
 
 //assign routers
