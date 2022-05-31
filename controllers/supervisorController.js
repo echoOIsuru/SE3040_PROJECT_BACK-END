@@ -1,5 +1,5 @@
 const StudentTopicRequestModel = require('../models/StudentTopicRequestModel');
-var SupervisorModel = require('../models/SupervisorModel');
+const  SupervisorModel = require('../Models/SupervisorModel');
 const ChatModel = require('../models/SupervisorStudentChat');
 
 

@@ -5,6 +5,8 @@ const dotenv = require('dotenv');
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const bodyparser = require('body-parser');
+const fileRoute = require('./routes/adminRoutes');
+const path = require('path');
 const app = express();
 
 
@@ -30,6 +32,11 @@ app.use(cors({ origin: a, credentials: true }));
 //assign routers
 app.use("/api/v1", router);
 router.use(require('./Routes/router.js'))
+
+app.use("/api/v1/admin/", require("./Routes/adminRoutes.js"));
+
+app.use(express.static(path.join(__dirname, '..', 'build')));
+app.use(fileRoute);
 
 
 //yasiru----------------------------------
