@@ -18,11 +18,16 @@
   },
   "homepage": "https://github.com/echoOIsuru/SE3040_PROJECT_BACK-END#readme",
   "dependencies": {
-    "body-parser": "^1.20.0",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.2",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
-    "mongoose": "^6.3.2"
+    "joi": "^17.6.0",
+    "joy": "^0.1.1",
+    "mongoose": "^6.3.1",
+    "multer": "^1.4.4"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
