@@ -1,6 +1,5 @@
 const SupervisorModel = require("../../Models/SupervisorModel.js");
 
-
 const getSupervisor = async (req, res) => {
 
     try {

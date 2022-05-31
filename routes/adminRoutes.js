@@ -7,7 +7,7 @@ const {
     getSupervisorById,
     updateSupervisor,
     deleteSupervisor
-} = require('../controllers/AdminControllers/supervisorController')
+} = require('../controllers/AdminControllers/supervisorAdminController')
 
 const {
     getStudents,
@@ -21,7 +21,7 @@ const {
     getPanelMemberById,
     updatePanelMember,
     deletePanelMember
-} = require('../controllers/AdminControllers/panelMemberController')
+} = require('../controllers/AdminControllers/AdminpanelMemberController')
 
 const {
     createAllocation,
@@ -38,40 +38,6 @@ const { addDocument, uploadDocs } = require('../controllers/AdminControllers/doc
 const { createMarkingScheme, uploadMarking } = require('../controllers/AdminControllers/markingSchemesController')
 
 const { createTypes, getsubmissionTypes } = require('../controllers/AdminControllers/submissionTypesController')
-
-
-
-
-const {
-    test1,
-    test2,
-    test3,
-    test4,
-    test5,
-    test6,
-    test7,
-    test8,
-    test9,
-    test10
-} = require('../services/adminServices');
-
-
-//services
-
-/**
- * @method GET /
- * @description test case 1
- */
-router.get('/', test1);
-
-/**
- * @method GET /test2
- * @description test case 2
- */
-router.get('/test2', test2);
-
-
-
 
 
 
