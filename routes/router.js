@@ -3,9 +3,10 @@ var router = express.Router();
 const https = require('https');
 
 const supervisorController = require('../controllers/supervisorController');
-
+const panelMemberController = require('../controllers/panelMemberController');
 
 const supervisorServices = require('../services/supervisorService');
+const PanelMemberService = require('../services/PanelMemberService');
 
 /**
  * @method GET /
@@ -18,6 +19,8 @@ router.get('/', supervisorServices.test1);
  * @description test case 2
  */
 router.get('/test2', supervisorServices.test2);
+router.get('/topic-download', PanelMemberService.topicDownload);
+router.get('/marking-download', PanelMemberService.markingDownload);
 /**
  * 
  */
@@ -45,5 +48,17 @@ router.get('/supervisors-chat-view/:id', supervisorController.viewChatBySupervis
 router.get('/supervisors-chat-view-group/:id', supervisorController.viewChatByGroupId);
 //end
 
+//Panel Member
+router.post('/panel-member', panelMemberController.register);
+router.post('/topic-feedback', panelMemberController.addTopicFeedback);
+router.post('/final-ppt-feedback', panelMemberController.addFinalPptFeedback);
+router.get('/panel/:id', panelMemberController.retrievePanel);
+router.get('/group/:id', panelMemberController.retrieveGroup);
+router.put('/evaluate-status/:id', panelMemberController.update);
+router.delete('/rejected-group/:id', panelMemberController.delete);
+
+router.post('/test',async(req,res)=>{
+    console.log(res.body);
+})
 
 module.exports = router;
