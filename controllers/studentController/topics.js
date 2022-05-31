@@ -1,5 +1,5 @@
 const router = require("express").Router();
-let Topic= require("../Models/TopicregistrationModel");
+let Topic= require("../../Models/TopicregistrationModel");
 
 
 

@@ -1,5 +1,5 @@
 const router = require("express").Router();
-let Group= require("../Models/groupRegistration");
+let Group= require("../../Models/groupRegistration");
 
 
 

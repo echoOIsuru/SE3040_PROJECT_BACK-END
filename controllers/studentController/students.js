@@ -1,5 +1,5 @@
 const router = require("express").Router();
-let Student = require("../Models/studentmodule");
+let Student = require("../../Models/studentmodule");
 
 
 

@@ -32,13 +32,13 @@ app.use(cors({origin : a,credentials:true}));
 app.use("/api/v1", router);
 router.use(require('./Routes/router.js'))
 
-const studentRouter = require("./routes/students.js")
-const topicRouter = require("./routes/topics.js")
-const loginRouter = require("./routes/login.js")
-const groupRouter = require("./routes/groups.js")
-const fileRouter = require("./routes/file.js")
-const adminRouter=require("./routes/admin.js")
-const submitionRouter = require("./routes/submition.js")
+const studentRouter = require("./controllers/studentController/students.js")
+const topicRouter = require("./controllers/studentController/topics.js")
+const loginRouter = require("./controllers/studentController/login.js")
+const groupRouter = require("./controllers/studentController/groups.js")
+const fileRouter = require("./controllers/studentController/file.js")
+const adminRouter=require("./controllers/studentController/admin.js")
+const submitionRouter = require("./controllers/studentController/submition.js")
 
 app.use("/student",studentRouter);
 app.use("/topic",topicRouter);  

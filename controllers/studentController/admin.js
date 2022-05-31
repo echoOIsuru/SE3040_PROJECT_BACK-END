@@ -1,13 +1,13 @@
 const path = require('path');
 const multer = require('multer');
-const UploadedDocuments = require('../models/docsUploadModel');
+const UploadedDocuments = require('../../models/docsUploadModel');
 const Router = require('express').Router();
 const ObjectId = require('mongodb').ObjectID;
 
 const upload = multer({
   storage: multer.diskStorage({
     destination(req, file, cb) {
-      cb(null, './files');
+      cb(null, './AdminUploadedDocs');
     },
     filename(req, file, cb) {
       cb(null, `${new Date().getTime()}_${file.originalname}`);
@@ -48,7 +48,8 @@ Router.get('/download/:id', async (req, res) => {
     res.set({
       'Content-Type': file.file_mimetype
     });
-    res.sendFile(path.join(__dirname, '..', file.file_path));
+    console.log('aaaa',__dirname);
+    res.sendFile(path.join(__dirname, '../../', file.file_path));
   } catch (error) {
     res.status(400).send('Error while downloading file. Try again later.');
   }
