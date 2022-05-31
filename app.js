@@ -5,7 +5,7 @@ const dotenv = require('dotenv');
 const cookieParser=require("cookie-parser");
 const cors = require("cors");
 const bodyparser = require('body-parser');
-const connection = require("./database/connection");
+
 const app = express();
 
 //cross origin
@@ -20,7 +20,7 @@ connectDB();
 
 //parse data to body
 app.use(bodyparser.json())
-connection();
+
 const a=["http://localhost:8090","http://localhost:1234"]
 // // middlewares
 
