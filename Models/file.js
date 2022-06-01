@@ -7,6 +7,10 @@ const fileSchema = mongoose.Schema(
       required: true,
       trim: true
     },
+    status: {
+      type: String,
+      required: true
+    },
     email: {
       type: String,
       required: true,

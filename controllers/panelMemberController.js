@@ -2,6 +2,7 @@ var PanelMemberModel = require('../Models/PanelMemberModel');
 var TopicEvaluateModel = require('../Models/TopicEvaluateModel');
 var FinalPptEvaluateModel = require('../Models/FinalPptEvaluateModel');
 var AllocatedPanel = require('../Models/AdminModels/panelAllocationModel');
+var TopicSubmission = require('../models/file');
 
 /** 
  *  Register panel member
@@ -111,64 +112,32 @@ exports.retrievePanel = async(req, res) => {
     
             let temp2 = temp.concat(result)
 
-           
             res.send(temp2)
         })
     
-
-
     })
-    // .then(data => {
-    //     if(!data){
-    //         res.status(404).send({
-    //             message : "Not found data with id : " + id
-    //         });
-    //     }else{
-    //         res.send(data);
-    //     }
-    // })
-    // .catch(err => {
-    //     res.status(500).send({
-    //         message : err.message || "Error occurred while retrieving"
-    //     })
-    // })
+
 }
 
 //retrieve group details
 exports.retrieveGroup = async(req, res) => {
     const id = req.params.id;
 
-
-
-    const temp = [
-        {
-            groupId: "7",
-            topic:"Blockchain"
-        },
-        
-        {
-            groupId: "8",
-            topic:"IOT"
+    TopicSubmission.find({"title":id})
+    .then(data => {
+        if(!data){
+            res.status(404).send({
+                message : "Not found data with id : " + id
+            });
+        }else{
+            res.send(data);
         }
-    ]
-
-    res.send(temp);
-    /***** topic registrations model ******************************************************************************* */
-    // modelname.findById(id)
-    // .then(data => {
-    //     if(!data){
-    //         res.status(404).send({
-    //             message : "Not found data with id : " + id
-    //         });
-    //     }else{
-    //         res.send(data);
-    //     }
-    // })
-    // .catch(err => {
-    //     res.status(500).send({
-    //         message : err.message || "Error occurred while retrieving"
-    //     })
-    // })
+    })
+    .catch(err => {
+        res.status(500).send({
+            message : err.message || "Error occurred while retrieving"
+        })
+    })
 
    
 }
@@ -176,33 +145,51 @@ exports.retrieveGroup = async(req, res) => {
 /** 
  *  Update topic evaluation status
 **/
-exports.update = async(req, res) => {
-    if(!req.body){
-        return res.status(400).send({
-            message : "Data to update cannot be empty"
-        })
-    }
-
+exports.update = (req, res) => {
     const id = req.params.id;
+    const status = req.body.status;
 
-    TopicEvaluateModel.findByIdAndUpdate(id, req.body, {useFindAndModify:false})
-    .then(data => {
-        if(!data){
-            res.status(404).send({
-                message : `Cannot update status with id : ${id}`
-            });
+    TopicSubmission.findOneAndUpdate({"title":id}, { $set: { "status": status } }, { upsert: true }, (err, result) => {
+        if (err) {
+            res.send(err)
         }else{
-            const data = req.body
-            data._id = req.params.id
-            res.send(data);
+            res.send(result)
         }
+
     })
-    .catch(err => {
-        res.status(500).send({
-            message : "Error occurred while updating"
-        })
-    })
+
 }
+
+
+// exports.update = async(req, res) => {
+//     if(!req.body){
+//         return res.status(400).send({
+//             message : "Data to update cannot be empty"
+//         })
+//     }
+
+//     const id = req.params.id;
+//     const status = req.body.status;
+
+
+//     TopicEvaluateModel.findOneAndUpdate({"title":id}, { $set: { "status": status } }, {useFindAndModify:false})
+//     .then(data => {
+//         if(!data){
+//             res.status(404).send({
+//                 message : `Cannot update status with id : ${id}`
+//             });
+//         }else{
+//             const data = req.body
+//             data._id = req.params.id
+//             res.send(data);
+//         }
+//     })
+//     .catch(err => {
+//         res.status(500).send({
+//             message : "Error occurred while updating"
+//         })
+//     })
+// }
 
 /** 
  *  Delete records of rejected topic details
@@ -210,7 +197,7 @@ exports.update = async(req, res) => {
 exports.delete = async(req, res) => {
     const id = req.params.id;
 
-    TopicEvaluateModel.findByIdAndDelete(id)
+    TopicSubmission.remove({"title":id})
         .then(data => {
             if(!data){
                 res.status(404).send({

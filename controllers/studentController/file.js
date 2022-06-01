@@ -33,10 +33,11 @@ Router.post(
   upload.single('file'),
   async (req, res) => {
     try {
-      const { title, email } = req.body;
+      const { title, email, status } = req.body;
       const { path, mimetype, filename } = req.file;
       const file = new File({
         title,
+        status:"Pending",
         email,
         file_path: path,
         file_mimetype: mimetype
