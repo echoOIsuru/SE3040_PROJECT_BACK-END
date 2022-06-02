@@ -1,3 +1,4 @@
+const Document_Submition = require('../models/documentSubmition');
 const Group = require('../Models/groupRegistration');
 const StudentTopicRequestModel = require('../models/StudentTopicRequestModel');
 const  SupervisorModel = require('../Models/SupervisorModel');
@@ -43,14 +44,15 @@ exports.find = (req, res) => {
     })
 }
 
-//update a record by object id
-exports.update = (req, res) => {
-
-}
-
-//delete a record by object id
+//delete supervisor topic request
 exports.delete = (req, res) => {
 
+    StudentTopicRequestModel.deleteOne({ _id: req.params.id }, (err, result) => {
+        if (err)
+            res.send(err)
+
+        res.send(result)
+    })
 }
 
 
@@ -98,8 +100,18 @@ exports.findTopicRequestBySupervisorID = (req, res) => {
 }
 
 //find topic request accoding to the groupID
-exports.fnindTopicRequestByGroupId = (req, res) => {
+exports.findTopicRequestByGroupId = (req, res) => {
     StudentTopicRequestModel.findOne({ "s_group._id": req.params.id }, (err, result) => {
+        if (err) {
+            res.send(err)
+        }
+
+        res.send(result)
+    })
+}
+
+exports.findTopicRequestByGroupName = (req, res) => {
+    StudentTopicRequestModel.findOne({ "s_group.group_name": req.params.id }, (err, result) => {
         if (err) {
             res.send(err)
         }
@@ -277,5 +289,16 @@ exports.getGroupByStudentNIC = (req, res) => {
             res.send(result)
         }
 
+    })
+
+}
+
+
+//get all document submissions
+exports.getAllDocumentSubmissions = (req, res) => {
+    Document_Submition.find({}, (err, result) => {
+        if (err)
+            res.send(err)
+        res.send(result)
     })
 }

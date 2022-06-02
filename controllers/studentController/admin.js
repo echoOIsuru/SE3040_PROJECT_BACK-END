@@ -48,7 +48,9 @@ Router.get('/download/:id', async (req, res) => {
     res.set({
       'Content-Type': file.file_mimetype
     });
-    console.log('aaaa',__dirname);
+
+    // console.log('aaaa',__dirname);
+    
     res.sendFile(path.join(__dirname, '../../', file.file_path));
   } catch (error) {
     res.status(400).send('Error while downloading file. Try again later.');
