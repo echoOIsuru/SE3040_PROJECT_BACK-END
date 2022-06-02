@@ -22,10 +22,10 @@ router.get('/test2', supervisorServices.test2);
 router.get('/topic-download', PanelMemberService.topicDownload);
 router.get('/marking-download', PanelMemberService.markingDownload);
 /**
- * 
+ * supervisor downloadings
  */
-router.get('/supervisors/downloads/:id', supervisorServices.downloadsMarking);
-
+router.get('/supervisors/downloads/:id', supervisorServices.downloadsGroupSubmission);
+router.get('/supervisors/marking-downloads', supervisorServices.downloadsMarking)
 
 
 //API

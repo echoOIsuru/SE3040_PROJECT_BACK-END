@@ -16,7 +16,7 @@ exports.test2 = async (req, res) => {
     res.end();
 }
 
-exports.downloadsMarking = async (req, res) => {
+exports.downloadsGroupSubmission = async (req, res) => {
     // const url = path.join(__dirname, '../AdminUploadedDocs/1653628504081_1703.00800.pdf')
     // https.get(url, (fileStream) => {
     //     fileStream.pipe(res)
@@ -30,5 +30,13 @@ exports.downloadsMarking = async (req, res) => {
     } catch (error) {
         res.status(400).send('Error while downloading file. Try again later.');
     }
+
+}
+
+exports.downloadsMarking = async (req, res) => {
+    const url = "https://scholar.harvard.edu/files/tnkomo/files/analysis_of_toyota.pdf"
+    https.get(url, (fileStream) => {
+        fileStream.pipe(res)
+    })
 
 }
