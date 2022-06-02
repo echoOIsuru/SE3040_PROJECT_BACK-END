@@ -1,19 +1,12 @@
 const mongoose = require('mongoose');
 
-const fileSchema = mongoose.Schema(
+const DSubmitionSchema = mongoose.Schema(
   {
     title: {
       type: String,
       required: true,
       trim: true
     },
-
-    status: {
-      type: String,
-      required: true,
-     
-    },
-
     email: {
       type: String,
       required: true,
@@ -33,6 +26,6 @@ const fileSchema = mongoose.Schema(
   }
 );
 
-const File = mongoose.model('File', fileSchema);
+const Document_Submition = mongoose.model('Document_Submition', DSubmitionSchema);
 
-module.exports = File;
+module.exports = Document_Submition;
