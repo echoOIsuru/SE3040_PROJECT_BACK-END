@@ -32,8 +32,7 @@ router.get('/supervisors/downloads', supervisorServices.downloadsMarking);
 
 //supervisor
 router.post('/supervisors', supervisorController.create);
-router.get('/supervisors', supervisorController.find);
-router.put('/supervisors/:id', supervisorController.update);
+router.get('/supervisors/:id', supervisorController.find);
 router.post('/supervisors/:id', supervisorController.delete);
 router.post('/supervisors-validate', supervisorController.validateSupervisor);
 router.get('/supervisors-field/:field', supervisorController.findSupervisorByField);
@@ -41,11 +40,15 @@ router.get('/supervisors-field/:field', supervisorController.findSupervisorByFie
 router.post('/supervisors-request-topic', supervisorController.requestTopic);
 router.get('/supervisors-topic-requests/:id', supervisorController.findTopicRequestBySupervisorID)
 router.patch('/supervisors-requests-status', supervisorController.setStatusForTopicRequest)
+router.get('/supervisors-topic-by-group/:id', supervisorController.fnindTopicRequestByGroupId)
 
 router.post('/supervisors-chat-service', supervisorController.createChat);
 router.patch('/supervisors-chat-service', supervisorController.putChatsInToGroupChat);
 router.get('/supervisors-chat-view/:id', supervisorController.viewChatBySupervisorId);
 router.get('/supervisors-chat-view-group/:id', supervisorController.viewChatByGroupId);
+
+router.get('/supervisors-all-groups', supervisorController.getAllGroups);
+router.get('/supervisors-student-nic/:id', supervisorController.getGroupByStudentNIC)
 //end
 
 //Panel Member
@@ -57,7 +60,7 @@ router.get('/group/:id', panelMemberController.retrieveGroup);
 router.put('/evaluate-status/:id', panelMemberController.update);
 router.delete('/rejected-group/:id', panelMemberController.delete);
 
-router.post('/test',async(req,res)=>{
+router.post('/test', async (req, res) => {
     console.log(res.body);
 })
 
