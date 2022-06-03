@@ -1,4 +1,4 @@
-const SubmissionTypesModel = require("../../Models/AdminModels/submissionTypesModel.js");
+const SubmissionTypesModel = require("../../models_db/AdminModels/submissionTypesModel.js");
 
 const createTypes = async (req, res) => {
 

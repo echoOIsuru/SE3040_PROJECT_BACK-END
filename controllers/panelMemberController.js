@@ -1,27 +1,27 @@
-var PanelMemberModel = require('../Models/PanelMemberModel');
-var TopicEvaluateModel = require('../Models/TopicEvaluateModel');
-var FinalPptEvaluateModel = require('../Models/FinalPptEvaluateModel');
-var AllocatedPanel = require('../Models/AdminModels/panelAllocationModel');
-var TopicSubmission = require('../models/file');
+var PanelMemberModel = require('../models_db/PanelMemberModel');
+var TopicEvaluateModel = require('../models_db/TopicEvaluateModel');
+var FinalPptEvaluateModel = require('../models_db/FinalPptEvaluateModel');
+var AllocatedPanel = require('../models_db/AdminModels/panelAllocationModel');
+var TopicSubmission = require('../models_db/file');
 
 /** 
  *  Register panel member
 **/
-exports.register = async(req, res) => {
-    if(!req.body){
+exports.register = async (req, res) => {
+    if (!req.body) {
         res.status(400).send({
-            message : "Content Cannot Be Empty"
+            message: "Content Cannot Be Empty"
         });
         return;
     }
 
     const record = new PanelMemberModel({
-        name : req.body.name,
-        email : req.body.email,
-        phone : req.body.phone,
-        research : req.body.research,
-        username : req.body.username,
-        password : req.body.password
+        name: req.body.name,
+        email: req.body.email,
+        phone: req.body.phone,
+        research: req.body.research,
+        username: req.body.username,
+        password: req.body.password
     })
 
     record
@@ -31,7 +31,7 @@ exports.register = async(req, res) => {
         })
         .catch(err => {
             res.status(500).send({
-                message : err.message || "Error occurred while registering"
+                message: err.message || "Error occurred while registering"
             })
         })
 }
@@ -59,18 +59,18 @@ exports.validatePanelMemberLogin = (req, res) => {
 /** 
  *  Add topic feedback
 **/
-exports.addTopicFeedback = async(req, res) => {
-    if(!req.body){
+exports.addTopicFeedback = async (req, res) => {
+    if (!req.body) {
         res.status(400).send({
-            message : "Content Cannot Be Empty"
+            message: "Content Cannot Be Empty"
         });
         return;
     }
 
     const record = new TopicEvaluateModel({
-        groupId : req.body.groupId,
-        status : req.body.status,
-        feedbacks : req.body.feedbacks
+        groupId: req.body.groupId,
+        status: req.body.status,
+        feedbacks: req.body.feedbacks
     })
 
     record
@@ -80,7 +80,7 @@ exports.addTopicFeedback = async(req, res) => {
         })
         .catch(err => {
             res.status(500).send({
-                message : err.message || "Error occurred while adding"
+                message: err.message || "Error occurred while adding"
             })
         })
 }
@@ -88,10 +88,10 @@ exports.addTopicFeedback = async(req, res) => {
 /** 
  *  Add final presentation feedback
 **/
-exports.addFinalPptFeedback = async(req, res) => {
-    if(!req.body){
+exports.addFinalPptFeedback = async (req, res) => {
+    if (!req.body) {
         res.status(400).send({
-            message : "Content Cannot Be Empty"
+            message: "Content Cannot Be Empty"
         });
         return;
     }
@@ -108,27 +108,27 @@ exports.addFinalPptFeedback = async(req, res) => {
         })
         .catch(err => {
             res.status(500).send({
-                message : err.message || "Error occurred while adding"
+                message: err.message || "Error occurred while adding"
             })
         })
 }
 
 //retrieve allocated panel details
-exports.retrievePanel = async(req, res) => {
+exports.retrievePanel = async (req, res) => {
     const id = req.params.id;
 
-    AllocatedPanel.find({"panel_member1":id}, (err,result)=>{
-        if(err){
+    AllocatedPanel.find({ "panel_member1": id }, (err, result) => {
+        if (err) {
             res.send(err)
         }
 
         let temp = result
 
-        AllocatedPanel.find({"panel_member2":id}, (err,result)=>{
-            if(err){
+        AllocatedPanel.find({ "panel_member2": id }, (err, result) => {
+            if (err) {
                 res.send(err)
             }
-    
+
             let temp2 = temp.concat(result)
 
             res.send(temp2)
@@ -139,7 +139,7 @@ exports.retrievePanel = async(req, res) => {
 }
 
 //retrieve group details
-exports.retrieveGroup = async(req, res) => {
+exports.retrieveGroup = async (req, res) => {
     const id = req.params.id;
 
     TopicSubmission.find({"title":id})
@@ -158,7 +158,7 @@ exports.retrieveGroup = async(req, res) => {
         })
     })
 
-   
+
 }
 
 /** 
@@ -213,24 +213,24 @@ exports.update = (req, res) => {
 /** 
  *  Delete records of rejected topic details
 **/
-exports.delete = async(req, res) => {
+exports.delete = async (req, res) => {
     const id = req.params.id;
 
     TopicSubmission.remove({"title":id})
         .then(data => {
-            if(!data){
+            if (!data) {
                 res.status(404).send({
-                    message : `Cannot delete with id : ${id} `
+                    message: `Cannot delete with id : ${id} `
                 });
-            }else{
+            } else {
                 res.send({
-                    message : "Rejected topic details were deleted successfully"
+                    message: "Rejected topic details were deleted successfully"
                 });
             }
         })
         .catch(err => {
             res.status(500).send({
-                messsage : "Could not delete data with id : " + id
+                messsage: "Could not delete data with id : " + id
             });
         });
 }

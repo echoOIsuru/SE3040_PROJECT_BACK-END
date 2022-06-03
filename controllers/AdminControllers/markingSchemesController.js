@@ -1,4 +1,4 @@
-const MarkingModel = require("../../Models/AdminModels/markingSchemesModel.js");
+const MarkingModel = require("../../models_db/AdminModels/markingSchemesModel.js");
 const multer = require('multer');
 
 const uploadMarking = multer({

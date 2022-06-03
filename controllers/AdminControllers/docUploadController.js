@@ -1,4 +1,4 @@
-const DocUploadModel = require("../../Models/AdminModels/docsUploadModel.js");
+const DocUploadModel = require("../../models_db/AdminModels/docsUploadModel.js");
 const multer = require('multer');
 
 const uploadDocs = multer({

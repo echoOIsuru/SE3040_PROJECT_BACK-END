@@ -1,6 +1,9 @@
-const StudentTopicRequestModel = require('../models/StudentTopicRequestModel');
-const  SupervisorModel = require('../Models/SupervisorModel');
-const ChatModel = require('../models/SupervisorStudentChat');
+const Document_Submition = require('../models_db/documentSubmition');
+const Group = require('../models_db/groupRegistration');
+const StudentTopicRequestModel = require('../models_db/StudentTopicRequestModel');
+var SupervisorModel = require('../models_db/SupervisorModel');
+const ChatModel = require('../models_db/SupervisorStudentChat');
+const SupervisorFeedback = require('../models_db/SupervisorFeedback')
 
 
 //create new record
@@ -33,18 +36,27 @@ exports.create = async (req, res) => {
 
 //retrive and return all/single record
 exports.find = (req, res) => {
+    const id = req.params.id;
 
+    SupervisorModel.findById(id, (err, result) => {
+        if (err)
+            res.send(err)
+        res.send(result)
+    })
 }
 
-//update a record by object id
-exports.update = (req, res) => {
-
-}
-
-//delete a record by object id
+//delete supervisor topic request
 exports.delete = (req, res) => {
 
+    StudentTopicRequestModel.deleteOne({ _id: req.params.id }, (err, result) => {
+        if (err)
+            res.send(err)
+
+        res.send(result)
+    })
 }
+
+
 
 //topic registration 
 exports.requestTopic = async (req, res) => {
@@ -61,7 +73,8 @@ exports.requestTopic = async (req, res) => {
         supervisor: req.body.supervisor,
         topic: req.body.topic,
         topic_details: req.body.topic_details,
-        s_status: "Pending"
+        s_status: "Pending",
+        s_group: req.body.s_group
     })
 
     topicRegisterRequest.save().then(data => {
@@ -85,6 +98,27 @@ exports.findTopicRequestBySupervisorID = (req, res) => {
         res.send(result)
     })
 
+}
+
+//find topic request accoding to the groupID
+exports.findTopicRequestByGroupId = (req, res) => {
+    StudentTopicRequestModel.findOne({ "s_group._id": req.params.id }, (err, result) => {
+        if (err) {
+            res.send(err)
+        }
+
+        res.send(result)
+    })
+}
+
+exports.findTopicRequestByGroupName = (req, res) => {
+    StudentTopicRequestModel.findOne({ "s_group.group_name": req.params.id }, (err, result) => {
+        if (err) {
+            res.send(err)
+        }
+
+        res.send(result)
+    })
 }
 
 //update request with supervisor status
@@ -206,4 +240,94 @@ exports.viewChatByGroupId = (req, res) => {
             res.send(err)
         res.send(result)
     })
+}
+
+
+//get Student Groups
+
+exports.getAllGroups = (req, res) => {
+    Group.find({}, (err, result) => {
+        if (err)
+            res.send(err)
+
+        res.send(result)
+    })
+}
+
+//get student group according to the student NIC
+
+exports.getGroupByStudentNIC = (req, res) => {
+    Group.findOne({ leader_nic: req.params.id }, (err, result) => {
+        if (err)
+            res.send(err)
+        if (!result) {
+            Group.findOne({ member1_nic: req.params.id }, (err, result) => {
+                if (err)
+                    res.send(err)
+                if (!result) {
+                    Group.findOne({ member2_nic: req.params.id }, (err, result) => {
+                        if (err)
+                            res.send(err)
+                        if (!result) {
+                            Group.findOne({ member3_nic: req.params.id }, (err, result) => {
+                                if (err)
+                                    res.send(err)
+                                if (!result) {
+                                    res.send({})
+                                } else {
+                                    res.send(result)
+                                }
+                            })
+                        } else {
+                            res.send(result)
+                        }
+                    })
+                } else {
+                    res.send(result)
+                }
+            })
+        } else {
+            res.send(result)
+        }
+
+    })
+
+}
+
+
+//get all document submissions
+exports.getAllDocumentSubmissions = (req, res) => {
+    Document_Submition.find({}, (err, result) => {
+        if (err)
+            res.send(err)
+        res.send(result)
+    })
+}
+
+//create new record
+exports.createSupervisorFeedback = async (req, res) => {
+    if (!req.body) {
+        res.status(400).send({ message: "Content can not be empty!" })
+        return;
+    }
+
+    const record = new SupervisorFeedback({
+        feedback: req.body.feedback,
+        supervisor_id: req.body.supervisor_id,
+        group_name: req.body.group_name,
+        student_email: req.body.student_email,
+        topic_name: req.body.topic_name,
+        field: req.body.field
+    })
+
+    record
+        .save(record)
+        .then(data => {
+            res.send(data)
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Some erro occurred while creating"
+            })
+        })
 }

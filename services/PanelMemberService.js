@@ -1,7 +1,7 @@
 const https = require('https');
-const Files = require('../models/file');
-const Marking = require('../Models/AdminModels/markingSchemesModel');
-const Submissions = require('../Models/submition');
+const Files = require('../models_db/file');
+const Marking = require('../models_db/AdminModels/markingSchemesModel');
+const Submissions = require('../models_db/submition');
 const path = require('path');
 
 // Download topic document submission
@@ -27,7 +27,7 @@ exports.topicDownload = async(req, res) =>{
 exports.markingDownload = async(req, res) =>{
 
     try {
-        const file = await Marking.findById(req.params.id);
+        const file = await Files.findById(req.params.id);
         res.set({
             'Content-Type': file.file_mimetype
         });

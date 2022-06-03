@@ -1,4 +1,4 @@
-const PanelMemberModel = require("../../Models/PanelMemberModel.js");
+const PanelMemberModel = require("../../models_db/PanelMemberModel.js");
 
 
 const getPanelMembers = async (req, res) => {

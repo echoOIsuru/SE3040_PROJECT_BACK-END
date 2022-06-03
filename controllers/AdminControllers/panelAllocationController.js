@@ -1,6 +1,6 @@
-const PanelAllocationModel = require("../../Models/AdminModels/panelAllocationModel.js");
-const PanelMemberModel = require("../../Models/PanelMemberModel.js")
-const StGroupsModel = require("../../Models/groupRegistration.js")
+const PanelAllocationModel = require("../../models_db/AdminModels/panelAllocationModel.js");
+const PanelMemberModel = require("../../models_db/PanelMemberModel.js")
+const StGroupsModel = require("../../models_db/groupRegistration.js")
 
 const createAllocation = async (req, res) => {
 
