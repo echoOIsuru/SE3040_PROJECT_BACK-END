@@ -36,6 +36,26 @@ exports.register = async(req, res) => {
         })
 }
 
+//validate panel member login
+exports.validatePanelMemberLogin = (req, res) => {
+    if (!req.body) {
+        res.status(400).send({ message: "Content can not be empty!" })
+        return;
+    }
+
+    const data = {
+        username: req.body.username,
+        password: req.body.password
+    }
+
+    PanelMemberModel.findOne(data, (err, result) => {
+        if (err) {
+            res.send(err);
+        }
+        res.send(result);
+    })
+}
+
 /** 
  *  Add topic feedback
 **/
@@ -78,7 +98,6 @@ exports.addFinalPptFeedback = async(req, res) => {
 
     const record = new FinalPptEvaluateModel({
         groupId : req.body.groupId,
-        topic : req.body.topic,
         feedbacks : req.body.feedbacks
     })
 
@@ -151,9 +170,9 @@ exports.update = (req, res) => {
 
     TopicSubmission.findOneAndUpdate({"title":id}, { $set: { "status": status } }, { upsert: true }, (err, result) => {
         if (err) {
-            res.send(err)
+            res.send(err);
         }else{
-            res.send(result)
+            res.send(result);
         }
 
     })
