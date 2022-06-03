@@ -1,10 +1,10 @@
 const router = require("express").Router();
-let Student = require("../../Models/studentmodule");
+let Student = require("../../models_db/studentmodule");
 
 
 
 
-router.post("/add",async (req, res) => {
+router.post("/add", async (req, res) => {
 
     const user = await Student.findOne({ email: req.body.email });
     if (user)
@@ -54,7 +54,7 @@ router.route("/").get((req, res) => {
 router.route("/update/:id").put(async (req, res) => {
 
     let userId = req.params.id;
-    const { name, age, gender,nic,phone,email,password } = req.body;
+    const { name, age, gender, nic, phone, email, password } = req.body;
 
     const updateStudent = {
         name,
@@ -64,7 +64,7 @@ router.route("/update/:id").put(async (req, res) => {
         email,
         phone,
         password
-       
+
     }
     const update = await Student.findByIdAndUpdate(userId, updateStudent).then(() => {
         res.status(200).send({ status: "successfully updated" })
@@ -100,12 +100,12 @@ router.route("/get/:id").get(async (req, res) => {
 
 
 router.route("/get").get(async (req, res) => {
-	console.log(req.cookies);
-		let userId = req.cookies.uid;
-		const user = await Student.findOne({email:userId}).then((user) => {
-	
-			res.status(200).send( [user] )
-		})
-	})
+    console.log(req.cookies);
+    let userId = req.cookies.uid;
+    const user = await Student.findOne({ email: userId }).then((user) => {
+
+        res.status(200).send([user])
+    })
+})
 
 module.exports = router;
