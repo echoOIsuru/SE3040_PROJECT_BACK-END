@@ -52,6 +52,8 @@ router.get('/supervisors-all-groups', supervisorController.getAllGroups);
 router.get('/supervisors-student-nic/:id', supervisorController.getGroupByStudentNIC)
 
 router.get('/supervisors-documet-submissions', supervisorController.getAllDocumentSubmissions)
+
+router.post('/supervisors-feedback', supervisorController.createSupervisorFeedback);
 //end
 
 //Panel Member
