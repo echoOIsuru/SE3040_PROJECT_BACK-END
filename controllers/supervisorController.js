@@ -3,6 +3,7 @@ const Group = require('../Models/groupRegistration');
 const StudentTopicRequestModel = require('../models/StudentTopicRequestModel');
 const  SupervisorModel = require('../Models/SupervisorModel');
 const ChatModel = require('../models/SupervisorStudentChat');
+const SupervisorFeedback = require('../models/SupervisorFeedback')
 
 
 //create new record
@@ -301,4 +302,32 @@ exports.getAllDocumentSubmissions = (req, res) => {
             res.send(err)
         res.send(result)
     })
+}
+
+//create new record
+exports.createSupervisorFeedback = async (req, res) => {
+    if (!req.body) {
+        res.status(400).send({ message: "Content can not be empty!" })
+        return;
+    }
+
+    const record = new SupervisorFeedback({
+        feedback: req.body.feedback,
+        supervisor_id: req.body.supervisor_id,
+        group_name: req.body.group_name,
+        student_email: req.body.student_email,
+        topic_name: req.body.topic_name,
+        field: req.body.field
+    })
+
+    record
+        .save(record)
+        .then(data => {
+            res.send(data)
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Some erro occurred while creating"
+            })
+        })
 }
