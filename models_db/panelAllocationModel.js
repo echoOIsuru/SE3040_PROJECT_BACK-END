@@ -15,9 +15,6 @@ const allocatedPanelSchema = new Schema({
       panel_member2: {
         type: String,
         required: true,
-      },
-      remarks: {
-        type: String,
       }
     });
 
