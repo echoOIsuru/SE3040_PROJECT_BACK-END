@@ -16,7 +16,6 @@ exports.create = async (req, res) => {
         s_email: req.body.s_email,
         password: req.body.password,
         fields: req.body.selected
-
     })
 
     record

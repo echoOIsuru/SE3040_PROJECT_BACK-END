@@ -37,17 +37,36 @@ const { addDocument, uploadDocs } = require('../controllers/AdminControllers/doc
 
 const { createMarkingScheme, uploadMarking } = require('../controllers/AdminControllers/markingSchemesController')
 
-const { createTypes, getsubmissionTypes } = require('../controllers/AdminControllers/submissionTypesController')
+const { 
+    createTypes,
+    getsubmissionTypes,
+    getsubmissionTypesById,
+    updatesubmissionTypes,
+    deleteSubmissionTypes
+} = require('../controllers/AdminControllers/submissionTypesController')
+
+const { validateAdminLogin } = require('../controllers/AdminControllers/AdminLoginController')
 
 
 
 //API
 
+router.post('login/validate', validateAdminLogin);
+
 router.post("/create/markingScheme", uploadMarking.single('file'), createMarkingScheme);
+
+router.post("/upload/documents", uploadDocs.single('file'), addDocument);
+
 
 router.post("/create/submissionTypes", createTypes);
 
-router.post("/upload/documents", uploadDocs.single('file'), addDocument);
+router.get("/submissionTypes/all", getsubmissionTypes);
+
+router.get("/submissionTypes/:id", getsubmissionTypesById);
+
+router.put("/submissionTypes/:id", updatesubmissionTypes);
+
+router.delete("/submissionTypes/:id", deleteSubmissionTypes);
 
 
 router.post("/create/panelAllocation", createAllocation);
