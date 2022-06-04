@@ -45,11 +45,10 @@ router.post("/add", async (req, res) => {
 
 })
 
-router.route("/get").get(async (req, res) => {
-    console.log(req.cookies);
-    let userId = req.cookies.uid;
+router.route("/get/:id").get(async (req, res) => {
+    let userId = req.params.id;
+    console.log(userId)
     const user = await Group.find({ email: userId }).then((user) => {
-
         res.status(200).send([user])
     })
 })

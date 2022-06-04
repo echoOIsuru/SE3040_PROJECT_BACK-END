@@ -28,7 +28,7 @@ app.use(express.json());
 
 app.use(cookieParser());
 //cross origin
-app.use(cors({ origin: a, credentials: true }));
+app.use(cors({ origin: a }));
 
 //assign routers
 app.use("/api/v1", router);
@@ -38,7 +38,7 @@ router.use(require('./routes/router.js'))
 //yasiru----------------------------------
 const studentRouter = require("./controllers/studentController/students.js")
 const topicRouter = require("./controllers/studentController/topics.js")
-// const loginRouter = require("./controllers/studentController/login.js")
+const loginRouter = require("./controllers/studentController/login.js")
 const groupRouter = require("./controllers/studentController/groups.js")
 const fileRouter = require("./controllers/studentController/file.js")
 const adminRouter = require("./controllers/studentController/admin.js")
@@ -48,7 +48,7 @@ const supervisorTopicRouter = require("./controllers/studentController/panel_mem
 const supervisorFinalPpt = require("./controllers/studentController/final_presentation_feedback.js")
 app.use("/student", studentRouter);
 app.use("/topic", topicRouter);
-// app.use("/login", loginRouter);
+app.use("/login", loginRouter);
 app.use("/group", groupRouter);
 app.use("/file", fileRouter);
 app.use("/submition", submitionRouter);
