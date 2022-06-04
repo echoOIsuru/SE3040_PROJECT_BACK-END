@@ -1,6 +1,6 @@
 const path = require('path');
 const multer = require('multer');
-const UploadedDocuments = require('../../models_db/docsUploadModel');
+const uploadedDocuments = require('../../models_db/AdminModels/docsUploadModel');
 const Router = require('express').Router();
 const ObjectId = require('mongodb').ObjectID;
 
@@ -31,7 +31,7 @@ const upload = multer({
 
 Router.get('/getAllFiles', async (req, res) => {
   try {
-    const files = await UploadedDocuments.find({});
+    const files = await uploadedDocuments.find({});
     const sortedByCreationDate = files.sort(
       (a, b) => b.createdAt - a.createdAt
     );
@@ -44,7 +44,7 @@ Router.get('/getAllFiles', async (req, res) => {
 
 Router.get('/download/:id', async (req, res) => {
   try {
-    const file = await UploadedDocuments.findById(req.params.id);
+    const file = await uploadedDocuments.findById(req.params.id);
     res.set({
       'Content-Type': file.file_mimetype
     });

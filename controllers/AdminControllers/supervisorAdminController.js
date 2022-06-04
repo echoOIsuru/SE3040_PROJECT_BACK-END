@@ -1,5 +1,6 @@
 const SupervisorModel = require("../../models_db/SupervisorModel.js");
 
+//get all supervisors
 const getSupervisor = async (req, res) => {
 
     try {
@@ -10,7 +11,7 @@ const getSupervisor = async (req, res) => {
     }
 };
 
-
+//get supervisors by id
 const getSupervisorById = async (req, res) => {
 
     const StaffId = req.params.id;
@@ -26,7 +27,7 @@ const getSupervisorById = async (req, res) => {
     }
 };
 
-
+//update the selected supervisor
 const updateSupervisor = async (req, res) => {
 
     const StaffId = req.params.id;
@@ -61,6 +62,7 @@ const updateSupervisor = async (req, res) => {
     }
 };
 
+//delete supervisor
 const deleteSupervisor = async (req, res) => {
 
     const StaffId = req.params.id;
@@ -80,6 +82,7 @@ const deleteSupervisor = async (req, res) => {
     }
 };
 
+//export created controller functions
 module.exports = {
     getSupervisor,
     getSupervisorById,

@@ -1,6 +1,6 @@
 const StudentModel = require("../../models_db/studentmodule");
 
-
+//get all students
 const getStudents = async (req, res) => {
 
     try {
@@ -11,7 +11,7 @@ const getStudents = async (req, res) => {
     }
 };
 
-
+//get all students by id
 const getStudentById = async (req, res) => {
 
     const StudentId = req.params.id;
@@ -27,7 +27,7 @@ const getStudentById = async (req, res) => {
     }
 };
 
-
+//update student
 const updateStudent = async (req, res) => {
 
     const StudentId = req.params.id;
@@ -39,7 +39,7 @@ const updateStudent = async (req, res) => {
             return res.status(404).json("Not found such a Student to update");
         }
 
-        const {name,
+        const { name,
             nic,
             age,
             gender,
@@ -67,6 +67,7 @@ const updateStudent = async (req, res) => {
     }
 };
 
+//delete student
 const deleteStudent = async (req, res) => {
 
     const StudentId = req.params.id;
@@ -86,6 +87,7 @@ const deleteStudent = async (req, res) => {
     }
 };
 
+//export created controller functions
 module.exports = {
     getStudents,
     getStudentById,
