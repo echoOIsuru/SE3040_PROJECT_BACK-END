@@ -19,8 +19,9 @@ router.get('/', supervisorServices.test1);
  * @description test case 2
  */
 router.get('/test2', supervisorServices.test2);
-router.get('/topic-download', PanelMemberService.topicDownload);
-router.get('/marking-download', PanelMemberService.markingDownload);
+router.get('/topic-download/:id', PanelMemberService.topicDownload);
+router.get('/marking-download/:id', PanelMemberService.markingDownload);
+router.get('/final-ppt-download/:id', PanelMemberService.finalPptDownload);
 /**
  * supervisor downloadings
  */
@@ -64,6 +65,7 @@ router.get('/panel/:id', panelMemberController.retrievePanel);
 router.get('/group/:id', panelMemberController.retrieveGroup);
 router.put('/evaluate-status/:id', panelMemberController.update);
 router.delete('/rejected-group/:id', panelMemberController.delete);
+router.post('/panel-member-login', panelMemberController.validatePanelMemberLogin);
 
 router.post('/test', async (req, res) => {
     console.log(res.body);
