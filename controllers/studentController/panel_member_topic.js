@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-let TopicEvaluateModel= require("../../Models/TopicEvaluateModel");
+let TopicEvaluateModel = require("../../models_db/TopicEvaluateModel");
 
 
 

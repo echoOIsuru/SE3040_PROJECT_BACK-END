@@ -1,6 +1,7 @@
-const MarkingModel = require("../../Models/AdminModels/markingSchemesModel.js");
+const MarkingModel = require("../../models_db/AdminModels/markingSchemesModel.js");
 const multer = require('multer');
 
+//get the uploaded marking scheme from frontend and save in the directory
 const uploadMarking = multer({
   storage: multer.diskStorage({
     destination(req, file, cb) {
@@ -26,47 +27,48 @@ const uploadMarking = multer({
   }
 });
 
+//add the marking scheme
 const createMarkingScheme = async (req, res) => {
 
-    try {
-        const {
-            scheme_name,
-            submission_type,
-            note
-        } = req.body;
+  try {
+    const {
+      scheme_name,
+      submission_type,
+      note
+    } = req.body;
 
-        const{ path, mimetype } = req.file;
+    const { path, mimetype } = req.file;
 
-        const findMarkingScheme = await MarkingModel.find({
-            $and: [
-                { scheme_name:scheme_name },
-                { submission_type:submission_type }
-            ]
-        })
+    const findMarkingScheme = await MarkingModel.find({
+      $and: [
+        { scheme_name: scheme_name },
+        { submission_type: submission_type }
+      ]
+    })
 
-        if (findMarkingScheme.length > 0) {
-            return res.status(409).json({ message: scheme_name +" and "+ submission_type + " already exists in the System! Please Enter a Different One." });
-        }
-
-        const doc = new  MarkingModel({
-            scheme_name,
-            submission_type,
-            note,
-            file_path:path,
-            file_mimetype:mimetype
-        });
-
-        await doc.save();
-        res.status(201).json(doc);
-
-    } catch (error) {
-        res.status(400).json(error);
+    if (findMarkingScheme.length > 0) {
+      return res.status(409).json({ message: scheme_name + " and " + submission_type + " already exists in the System! Please Enter a Different One." });
     }
+
+    const doc = new MarkingModel({
+      scheme_name,
+      submission_type,
+      note,
+      file_path: path,
+      file_mimetype: mimetype
+    });
+
+    await doc.save();
+    res.status(201).json(doc);
+
+  } catch (error) {
+    res.status(400).json(error);
+  }
 
 };
 
-
+//export created controller functions
 module.exports = {
-    createMarkingScheme,
-    uploadMarking
+  createMarkingScheme,
+  uploadMarking
 }

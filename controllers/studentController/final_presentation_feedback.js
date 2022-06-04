@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-let FinalPptEvaluateModel= require("../../Models/FinalPptEvaluateModel");
+let FinalPptEvaluateModel = require("../../models_db/FinalPptEvaluateModel");
 
 
 

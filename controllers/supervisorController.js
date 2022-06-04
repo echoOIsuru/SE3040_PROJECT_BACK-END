@@ -1,9 +1,9 @@
-const Document_Submition = require('../models/documentSubmition');
-const Group = require('../Models/groupRegistration');
-const StudentTopicRequestModel = require('../models/StudentTopicRequestModel');
-const  SupervisorModel = require('../Models/SupervisorModel');
-const ChatModel = require('../models/SupervisorStudentChat');
-const SupervisorFeedback = require('../models/SupervisorFeedback')
+const Document_Submition = require('../models_db/documentSubmition');
+const Group = require('../models_db/groupRegistration');
+const StudentTopicRequestModel = require('../models_db/StudentTopicRequestModel');
+var SupervisorModel = require('../models_db/SupervisorModel');
+const ChatModel = require('../models_db/SupervisorStudentChat');
+const SupervisorFeedback = require('../models_db/SupervisorFeedback')
 
 
 //create new record

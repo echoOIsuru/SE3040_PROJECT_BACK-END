@@ -1,5 +1,6 @@
-const SubmissionTypesModel = require("../../Models/AdminModels/submissionTypesModel.js");
+const SubmissionTypesModel = require("../../models_db/AdminModels/submissionTypesModel.js");
 
+//add submission types
 const createTypes = async (req, res) => {
 
     try {
@@ -35,7 +36,7 @@ const createTypes = async (req, res) => {
 
 };
 
-
+//get all submission types
 const getsubmissionTypes = async (req, res) => {
 
     try {
@@ -46,6 +47,7 @@ const getsubmissionTypes = async (req, res) => {
     }
 };
 
+//get submission types by id
 const getsubmissionTypesById = async (req, res) => {
 
     const SubmissionTypesId = req.params.id;
@@ -61,7 +63,7 @@ const getsubmissionTypesById = async (req, res) => {
     }
 };
 
-
+//update submission type
 const updatesubmissionTypes = async (req, res) => {
 
     const SubmissionTypesId = req.params.id;
@@ -91,6 +93,7 @@ const updatesubmissionTypes = async (req, res) => {
     }
 };
 
+//delete submission type
 const deleteSubmissionTypes = async (req, res) => {
 
     const SubmissionTypesId = req.params.id;
@@ -110,7 +113,7 @@ const deleteSubmissionTypes = async (req, res) => {
     }
 };
 
-
+//export created controller functions
 module.exports = {
     createTypes,
     getsubmissionTypes,
