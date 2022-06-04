@@ -1,7 +1,8 @@
-const PanelAllocationModel = require("../../Models/AdminModels/panelAllocationModel.js");
-const PanelMemberModel = require("../../Models/PanelMemberModel.js")
-const StGroupsModel = require("../../Models/groupRegistration.js")
+const PanelAllocationModel = require("../../models_db/AdminModels/panelAllocationModel.js");
+const PanelMemberModel = require("../../models_db/PanelMemberModel.js")
+const StGroupsModel = require("../../models_db/groupRegistration.js")
 
+//create student panel member panel
 const createAllocation = async (req, res) => {
 
     try {
@@ -36,7 +37,7 @@ const createAllocation = async (req, res) => {
 
 };
 
-
+//get all allocated panels
 const getAllocatedPanels = async (req, res) => {
 
     try {
@@ -47,6 +48,7 @@ const getAllocatedPanels = async (req, res) => {
     }
 };
 
+//get all the panel members
 const getAllPanelMembers = async (req, res) => {
 
     try {
@@ -57,6 +59,7 @@ const getAllPanelMembers = async (req, res) => {
     }
 };
 
+//get all student groups
 const getAllStudentGroups = async (req, res) => {
 
     try {
@@ -67,7 +70,7 @@ const getAllStudentGroups = async (req, res) => {
     }
 };
 
-
+//get allocated panel by id
 const getAllocatedPanelByID = async (req, res) => {
 
     const PanelId = req.params.id;
@@ -83,7 +86,7 @@ const getAllocatedPanelByID = async (req, res) => {
     }
 };
 
-
+//update the allocated panel
 const updateAllocatedPanel = async (req, res) => {
 
     const PanelId = req.params.id;
@@ -95,7 +98,7 @@ const updateAllocatedPanel = async (req, res) => {
             return res.status(404).json("Not found such a panel to update");
         }
 
-        const { 
+        const {
             panel_member1,
             panel_member2,
         } = req.body;
@@ -114,6 +117,7 @@ const updateAllocatedPanel = async (req, res) => {
     }
 };
 
+//delete the allocated panel
 const deleteAllocatedPanel = async (req, res) => {
 
     const panelId = req.params.id;
@@ -133,8 +137,7 @@ const deleteAllocatedPanel = async (req, res) => {
     }
 };
 
-
-
+//export created controller functions
 module.exports = {
     createAllocation,
     updateAllocatedPanel,

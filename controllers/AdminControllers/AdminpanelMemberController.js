@@ -1,6 +1,6 @@
-const PanelMemberModel = require("../../Models/PanelMemberModel.js");
+const PanelMemberModel = require("../../models_db/PanelMemberModel.js");
 
-
+//get all panel members
 const getPanelMembers = async (req, res) => {
 
     try {
@@ -11,7 +11,7 @@ const getPanelMembers = async (req, res) => {
     }
 };
 
-
+//get panel members by id
 const getPanelMemberById = async (req, res) => {
 
     const PanelMemberId = req.params.id;
@@ -27,7 +27,7 @@ const getPanelMemberById = async (req, res) => {
     }
 };
 
-
+//update panel members
 const updatePanelMember = async (req, res) => {
 
     const PanelMemberId = req.params.id;
@@ -62,6 +62,7 @@ const updatePanelMember = async (req, res) => {
     }
 };
 
+//delete panel members
 const deletePanelMember = async (req, res) => {
 
     const PanelMemberId = req.params.id;
@@ -81,6 +82,7 @@ const deletePanelMember = async (req, res) => {
     }
 };
 
+//export created controller functions
 module.exports = {
     getPanelMembers,
     getPanelMemberById,

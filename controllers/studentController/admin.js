@@ -1,6 +1,6 @@
 const path = require('path');
 const multer = require('multer');
-const uploadedDocuments = require('../../models_db/docsUploadModel');
+const uploadedDocuments = require('../../models_db/AdminModels/docsUploadModel');
 const Router = require('express').Router();
 const ObjectId = require('mongodb').ObjectID;
 

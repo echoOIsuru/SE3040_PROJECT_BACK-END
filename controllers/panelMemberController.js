@@ -1,7 +1,7 @@
 var PanelMemberModel = require('../models_db/PanelMemberModel');
 var TopicEvaluateModel = require('../models_db/TopicEvaluateModel');
 var FinalPptEvaluateModel = require('../models_db/FinalPptEvaluateModel');
-var AllocatedPanel = require('../models_db/panelAllocationModel');
+var AllocatedPanel = require('../models_db/AdminModels/panelAllocationModel');
 
 /** 
  *  Register panel member

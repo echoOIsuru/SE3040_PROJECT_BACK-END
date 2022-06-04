@@ -6,7 +6,8 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const bodyparser = require('body-parser');
 const app = express();
-
+const fileRoute = require('./routes/adminRoutes');
+const path = require('path');
 
 //port configuration
 dotenv.config({ path: 'config.env' })
@@ -33,6 +34,12 @@ app.use(cors({ origin: a }));
 //assign routers
 app.use("/api/v1", router);
 router.use(require('./routes/router.js'))
+
+//admin root path
+app.use("/api/v1/admin/", require("./Routes/adminRoutes.js"));
+
+app.use(express.static(path.join(__dirname, '..', 'build')));
+app.use(fileRoute);
 
 
 //yasiru----------------------------------
