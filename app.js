@@ -6,7 +6,8 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const bodyparser = require('body-parser');
 const app = express();
-
+const fileRoute = require('./routes/adminRoutes');
+const path = require('path');
 
 //port configuration
 dotenv.config({ path: 'config.env' })
@@ -18,18 +19,27 @@ connectDB();
 //parse data to body
 app.use(bodyparser.json())
 
-const a = ["http://localhost:8090", "http://localhost:1234"]
+const a = ["http://localhost:8090", "http://localhost:1234", "http://isuru-sahan.me",
+    "https://p9b173fk99.execute-api.us-east-1.amazonaws.com/dev",
+    "http://research-project-management.s3-website-us-east-1.amazonaws.com",
+    "http://isuru-sahan.me.s3-website-us-east-1.amazonaws.com"]
 
 //middlewares
 app.use(express.json());
 
 app.use(cookieParser());
 //cross origin
-app.use(cors({ origin: a, credentials: true }));
+app.use(cors({ origin: a }));
 
 //assign routers
 app.use("/api/v1", router);
-router.use(require('./Routes/router.js'))
+router.use(require('./routes/router.js'))
+
+//admin root path
+app.use("/api/v1/admin/", require("./Routes/adminRoutes.js"));
+
+app.use(express.static(path.join(__dirname, '..', 'build')));
+app.use(fileRoute);
 
 
 //yasiru----------------------------------
@@ -58,3 +68,5 @@ app.use("/supervisorPpt", supervisorFinalPpt);
 app.listen(PORT, () => {
     console.log(`Server running on port http://localhost:${PORT}/api/v1`);
 })
+
+module.exports = app

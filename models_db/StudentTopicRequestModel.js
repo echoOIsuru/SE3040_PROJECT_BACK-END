@@ -33,6 +33,10 @@ const schema = mongoose.Schema({
     s_status: {
         type: String,
         require: true
+    },
+    s_group: {
+        type: Object,
+        require: true
     }
 })
 

@@ -1,6 +1,6 @@
 const path = require('path');
 const multer = require('multer');
-const Document_Submition = require('../../models/documentSubmition');
+const Document_Submition = require('../../models_db/documentSubmition');
 const Router = require('express').Router();
 const ObjectId = require('mongodb').ObjectID;
 
@@ -78,13 +78,13 @@ Router.get('/getFile/:id', async (req, res) => {
 
 
 Router.route("/get").get(async (req, res) => {
-	console.log(req.cookies);
-		let userId = req.cookies.uid;
-		const user = await Document_Submition.find({email:userId}).then((user) => {
-	
-			res.status(200).send( [user] )
-		})
-	})
+  console.log(req.cookies);
+  let userId = req.cookies.uid;
+  const user = await Document_Submition.find({ email: userId }).then((user) => {
+
+    res.status(200).send([user])
+  })
+})
 
 
 
@@ -116,8 +116,8 @@ Router.get('/download/:id', async (req, res) => {
 Router.delete('/file-delete/:id', async (req, res) => {
   try {
     Document_Submition.findByIdAndDelete(req.params.id)
-    .then(() => res.json('File deleted.'))
-    .catch(err => res.status(400).json('Error: ' + err));
+      .then(() => res.json('File deleted.'))
+      .catch(err => res.status(400).json('Error: ' + err));
   } catch (error) {
     res.status(400).send('File Deletion Failed');
   }
