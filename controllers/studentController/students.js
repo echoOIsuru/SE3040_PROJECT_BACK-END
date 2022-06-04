@@ -100,12 +100,12 @@ router.route("/get/:id").get(async (req, res) => {
 
 
 router.route("/get").get(async (req, res) => {
-    console.log(req.cookies);
-    let userId = req.cookies.uid;
-    const user = await Student.findOne({ email: userId }).then((user) => {
+    // console.log(req.cookies);
+    // let userId = req.cookies.uid;
+    // const user = await Student.findOne({ email: userId }).then((user) => {
 
-        res.status(200).send([user])
-    })
+    //     res.status(200).send([user])
+    // })
 })
 
 module.exports = router;
