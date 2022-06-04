@@ -77,11 +77,9 @@ Router.get('/getFile/:id', async (req, res) => {
 
 
 
-Router.route("/get").get(async (req, res) => {
-  console.log(req.cookies);
-  let userId = req.cookies.uid;
+Router.route("/get/:id").get(async (req, res) => {
+  let userId = req.params.id;
   const user = await Submition.find({ email: userId }).then((user) => {
-
     res.status(200).send([user])
   })
 })
