@@ -1,4 +1,4 @@
-const StudentModel = require("../../Models/studentmodule");
+const StudentModel = require("../../models_db/studentmodule");
 
 
 const getStudents = async (req, res) => {
@@ -39,7 +39,7 @@ const updateStudent = async (req, res) => {
             return res.status(404).json("Not found such a Student to update");
         }
 
-        const {name,
+        const { name,
             nic,
             age,
             gender,

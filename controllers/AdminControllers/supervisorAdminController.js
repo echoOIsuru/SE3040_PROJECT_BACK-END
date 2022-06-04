@@ -1,4 +1,4 @@
-const SupervisorModel = require("../../Models/SupervisorModel.js");
+const SupervisorModel = require("../../models_db/SupervisorModel.js");
 
 const getSupervisor = async (req, res) => {
 

@@ -27,5 +27,5 @@ const uploadDocsSchema = new Schema({
 
 uploadDocsSchema.index({ document_name:1, submission_type:1 }, { unique: true });
 
-const UploadedDocuments = mongoose.model('uploaded_documents', uploadDocsSchema);
-module.exports = UploadedDocuments;
+const uploadedDocuments = mongoose.model('upload_documents', uploadDocsSchema);
+module.exports = uploadedDocuments;

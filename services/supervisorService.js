@@ -1,7 +1,7 @@
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
-const Document_Submition = require('../models/documentSubmition');
+const Document_Submition = require('../models_db/documentSubmition');
 
 
 exports.test1 = async (req, res) => {
